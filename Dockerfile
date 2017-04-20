@@ -12,6 +12,8 @@ WORKDIR $CATALINA_HOME
 ENV TOMCAT_NATIVE_LIBDIR $CATALINA_HOME/native-jni-lib
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$TOMCAT_NATIVE_LIBDIR
 
+RUN apk update && apk add curl
+
 RUN apk add --no-cache gnupg
 
 # see https://www.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/KEYS
@@ -179,8 +181,6 @@ RUN set -e \
 RUN mkdir -p /logs && ln -s /usr/local/tomcat/logs /logs/tomcat && ln -s /usr/local/apache2/logs /logs/apache2
 
 EXPOSE 80 443
-
-RUN apk add curl
 
 COPY run.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/run.sh
