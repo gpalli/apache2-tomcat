@@ -1,7 +1,7 @@
 FROM openjdk:8-jre-alpine
 
 LABEL maintainer "guillermo.palli@gmail.com"
-LABEL description "This file combines Apache2 and Tomcat installations running with one image." 
+LABEL description "This file combines Apache2 and Tomcat installations running with one image."
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
@@ -179,6 +179,8 @@ RUN set -e \
 RUN mkdir -p /logs && ln -s /usr/local/tomcat/logs /logs/tomcat && ln -s /usr/local/apache2/logs /logs/apache2
 
 EXPOSE 80 443
+
+RUN apk add curl
 
 COPY run.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/run.sh
