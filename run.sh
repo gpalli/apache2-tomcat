@@ -13,5 +13,4 @@ else
   nohup catalina.sh jpda run >>log.out 2>&1 &
 fi
 
-tail -f log.out
-
+exec tail -f log.out
