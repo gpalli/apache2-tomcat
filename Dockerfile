@@ -1,6 +1,10 @@
 FROM openjdk:7-jre-alpine
 
-RUN apk update && apk add fontconfig
+# Fix to NPE sun.awt.X11FontManager.getDefaultPlatformFont
+# https://github.com/metabase/metabase/commit/9c9acc36d458ca3a81a2c4224a23bc51740b9e69 
+RUN apk update && apk add fontconfig ttf-dejavu
+ENV FC_LANG en-US
+ENV LC_CTYPE en_US.UTF-8
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
